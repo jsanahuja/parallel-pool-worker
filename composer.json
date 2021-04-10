@@ -1,0 +1,33 @@
+{
+    "name": "sowe/parallel",
+    "description": "PHP ext-parallel pool-worker abstraction",
+    "version": "0.0.1",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "pool",
+        "worker",
+        "task",
+        "parallel",
+        "thread",
+        "threads",
+        "multithreading"
+    ],
+    "authors": [
+        {
+            "name": "Javier Sanahuja",
+            "email": "bannss1@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/jsanahuja/parallel-pool-worker",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2",
+        "ext-parallel": "^1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sowe\\Parallel\\": "src/"
+        }
+    }
+}
