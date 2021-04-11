@@ -47,12 +47,12 @@ class Channel
         );
     }
 
-    public function recv() : mixed
+    public function recv()
     {
         return $this->channel->recv();
     }
 
-    public function send(mixed $value) : void
+    public function send($value) : void
     {
         $this->channel->send($value);
     }

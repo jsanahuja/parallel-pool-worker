@@ -8,7 +8,7 @@ class Pool
     protected $index;
     protected $workers;
     
-    public function __construct($size, $workerClass, $outputChannel, $bootstrap = AbstractWorker::BOOTSTRAP)
+    public function __construct($size, $workerClass, $outputChannel, $bootstrap = Worker::BOOTSTRAP)
     {
         $this->size = $size;
         $this->index = 0;
