@@ -4,43 +4,42 @@ namespace Sowe\Parallel;
 
 class Pool
 {
-    protected $size;
     protected $index;
+    protected $size;
     protected $workers;
-    
-    public function __construct($size, $workerClass, $outputChannel, $bootstrap = Worker::BOOTSTRAP)
-    {
-        $this->size = $size;
+
+    public function __construct($size, $bootstrap = null){
         $this->index = 0;
+        $this->size = $size;
         $this->workers = [];
-
-        if (is_null($bootstrap)) {
-            for($i = 0; $i < $size; $i++){
-                $inputChannel = Channel::make();
-                $this->workers[$i] = new $workerClass($inputChannel, $outputChannel);
-            }
-        } else {
-            for($i = 0; $i < $size; $i++){
-                $inputChannel = Channel::make();
-                $this->workers[$i] = new $workerClass($inputChannel, $outputChannel, $bootstrap);
-            }
+        for ($i = 0; $i < $size; $i++) {
+            $this->workers[] = new Worker($bootstrap);
         }
     }
 
-    public function start($workerArguments){
-        foreach($this->workers as $i => $worker){
-            $worker->start($workerArguments);
+    public function runAll(callable $task, $arguments = [])
+    {
+        foreach($this->workers as $worker){
+            $worker->run($task, $arguments);
         }
     }
 
-    public function stop(){
-        foreach($this->workers as $i => $worker){
+    public function run(callable $task, $arguments = [])
+    {
+        return $this->workers[$this->index++ % $this->size]->run($task, $arguments);
+    }
+
+    public function stop(): void
+    {
+        foreach($this->workers as $worker){
             $worker->stop();
         }
     }
 
-    public function dispatch($task){
-        $this->workers[$this->index % $this->size]->getInputChannel()->send($task);
-        $this->index++;
+    public function kill(): void
+    {
+        foreach($this->workers as $worker){
+            $worker->kill();
+        }
     }
 }

@@ -1,7 +1,7 @@
 {
     "name": "sowe/parallel",
     "description": "PHP ext-parallel pool-worker abstraction",
-    "version": "0.0.3",
+    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "keywords": [
