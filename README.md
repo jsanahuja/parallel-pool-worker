@@ -10,6 +10,11 @@ PHP ext-parallel pool-worker abstraction
 composer require sowe/parallel
 ```
 
+If your composer doesn't run your zts-php you can also install it running:
+```
+zts-php /usr/bin/composer require sowe/parallel
+```
+
 ## Example
 ```
 <?php
