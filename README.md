@@ -7,7 +7,7 @@ PHP ext-parallel pool-worker abstraction
 
 ## Install
 ```
-composer install sowe/parallel
+composer require sowe/parallel
 ```
 
 ## Example
